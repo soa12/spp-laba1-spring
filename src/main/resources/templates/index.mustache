@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<body>
+<div style="background-color: darkred; width: 200px;">
+  <h1> 
+  {{#status}}
+    {{ status }}!
+  {{/status}}
+  {{^status}}
+    App was stoped
+  {{/status}}
+  </h1>
+</div>
+  <form action="/action" method="GET">
+    <input type="submit" name="submit" value="Hello"/>
+    <input type="submit" name="submit" value="Bye"/>
+  </form>
+</body>
+
+</html>

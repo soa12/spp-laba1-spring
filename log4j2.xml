@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration>
+    <Properties>
+        <Property name="file.thresholdFilter">${bundle:application:logger.file.tresholdFilter}</Property>
+        <Property name="socket.thresholdFilter">${bundle:application:logger.socket.tresholdFilter}</Property>
+    </Properties>
+    <Appenders>
+        <File name="FILE" target="SYSTEM_OUT">
+            <ThresholdFilter level="${console.thresholdFilter}"/>
+            <PatternLayout pattern="%d %-5p [%t] %c{10} - %m%n"/>
+        </File>
+        <Socket name="SOCKET" host="${socket.host}" port="${socket.port}" immediateFlush="true">
+            <ThresholdFilter level="${socket.thresholdFilter}"/>
+            <JSONLayout eventEol="true" compact="true"/>
+        </Socket>
+        <Async name="ASYNC">
+            <AppenderRef ref="FILE"/>
+            <AppenderRef ref="SOCKET"/>
+        </Async>
+    </Appenders>
+
+    <Loggers>
+        <Logger name="ru.example" level="debug" additivity="false">
+            <AppenderRef ref="ASYNC"/>
+        </Logger>
+        <Root level="error">
+            <AppenderRef ref="ASYNC"/>
+        </Root>
+    </Loggers>
+</Configuration>
